@@ -22,15 +22,15 @@ const ResultModal: FC<ResultModalProps> = ({ team1, team2, onSave, onCancel }) =
         <div className="flex items-center justify-between mb-6">
           <button 
             onClick={onCancel}
-            className="w-9 h-9 rounded-xl bg-court-100 dark:bg-court-700 flex items-center justify-center hover:bg-court-200 dark:hover:bg-court-600 transition-colors"
+            className="w-10 h-10 rounded-xl bg-white dark:bg-court-700 shadow-md flex items-center justify-center hover:bg-court-100 dark:hover:bg-court-600 transition-colors"
           >
-            <ChevronLeft className="w-5 h-5 text-court-600 dark:text-court-300" />
+            <ChevronLeft className="w-6 h-6 text-court-700 dark:text-court-200" />
           </button>
           <div className="flex items-center gap-2">
             <Trophy className="w-5 h-5 text-sport-500" />
             <h2 className="text-lg sm:text-xl font-display font-black text-court-900 dark:text-white uppercase tracking-tight">Resultado</h2>
           </div>
-          <div className="w-9 h-9" />
+          <div className="w-10 h-10" />
         </div>
         
         {/* Winner selection */}

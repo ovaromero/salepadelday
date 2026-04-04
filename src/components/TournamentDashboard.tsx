@@ -57,9 +57,6 @@ const TournamentDashboard: FC<TournamentDashboardProps> = ({
               <h1 className="text-xl font-display font-black text-court-900 dark:text-white tracking-tight">
                 Sale<span className="text-sport-600 dark:text-sport-400">Padel</span>Day
               </h1>
-              <div className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse-live" />
-              </div>
             </div>
           </div>
           
@@ -95,11 +92,6 @@ const TournamentDashboard: FC<TournamentDashboardProps> = ({
             <div className="absolute inset-0 opacity-5">
               <div className="absolute top-0 right-0 w-40 h-40 bg-white rounded-full -translate-y-1/2 translate-x-1/2" />
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-white rounded-full translate-y-1/2 -translate-x-1/2" />
-            </div>
-            
-            {/* LIVE badge */}
-            <div className="absolute top-4 right-4 flex items-center gap-2 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
-              <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse-live" />
             </div>
             
             <div className="flex justify-between items-center mb-8 relative z-10">
