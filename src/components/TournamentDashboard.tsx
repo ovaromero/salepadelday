@@ -59,7 +59,6 @@ const TournamentDashboard: FC<TournamentDashboardProps> = ({
               </h1>
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse-live" />
-                <span className="text-[10px] font-bold text-court-400 dark:text-court-500 uppercase tracking-wider">En vivo</span>
               </div>
             </div>
           </div>
@@ -101,11 +100,10 @@ const TournamentDashboard: FC<TournamentDashboardProps> = ({
             {/* LIVE badge */}
             <div className="absolute top-4 right-4 flex items-center gap-2 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
               <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse-live" />
-              <span className="text-[10px] font-black uppercase tracking-widest">LIVE</span>
             </div>
             
             <div className="flex justify-between items-center mb-8 relative z-10">
-              <p className="font-bold uppercase tracking-[0.2em] text-sport-100 text-xs">Ahora Jugando</p>
+              <div></div>
               <button 
                 onClick={() => setShowChangeModal(true)}
                 className="flex items-center gap-1.5 text-xs font-bold uppercase bg-white/20 hover:bg-white/30 backdrop-blur-sm px-3 py-1.5 rounded-full transition-colors"

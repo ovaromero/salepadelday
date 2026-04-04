@@ -58,14 +58,14 @@ const TeamSetup: FC<TeamSetupProps> = ({ onStart }) => {
 
         <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
           {/* Team count selector */}
-          <div className="glass dark:glass-dark rounded-2xl p-1.5 flex justify-center gap-2 shadow-lg">
+          <div className="bg-white dark:bg-court-800 rounded-2xl p-2 flex justify-center gap-2 shadow-md border border-court-100 dark:border-court-700">
             <button
               type="button"
               onClick={() => setTeamCount(4)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
+              className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
                 teamCount === 4 
-                  ? 'sport-gradient text-white shadow-lg shadow-sport-500/30 scale-105' 
-                  : 'text-court-600 dark:text-court-300 hover:bg-court-100/50 dark:hover:bg-court-800'
+                  ? 'sport-gradient text-white shadow-lg shadow-sport-500/30' 
+                  : 'bg-transparent text-court-600 dark:text-court-300 hover:bg-court-50 dark:hover:bg-court-700'
               }`}
             >
               <Users className="w-4 h-4" />
@@ -74,10 +74,10 @@ const TeamSetup: FC<TeamSetupProps> = ({ onStart }) => {
             <button
               type="button"
               onClick={() => setTeamCount(5)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
+              className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
                 teamCount === 5 
-                  ? 'sport-gradient text-white shadow-lg shadow-sport-500/30 scale-105' 
-                  : 'text-court-600 dark:text-court-300 hover:bg-court-100/50 dark:hover:bg-court-800'
+                  ? 'sport-gradient text-white shadow-lg shadow-sport-500/30' 
+                  : 'bg-transparent text-court-600 dark:text-court-300 hover:bg-court-50 dark:hover:bg-court-700'
               }`}
             >
               <Users className="w-4 h-4" />

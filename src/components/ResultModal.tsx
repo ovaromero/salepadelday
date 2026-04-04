@@ -1,5 +1,5 @@
 import { useState, type FC } from 'react';
-import { Trophy, X, Check, ChevronLeft } from 'lucide-react';
+import { Trophy, Check, ChevronLeft } from 'lucide-react';
 import type { Team, MatchResult } from '../types';
 
 interface ResultModalProps {
@@ -24,7 +24,7 @@ const ResultModal: FC<ResultModalProps> = ({ team1, team2, onSave, onCancel }) =
             onClick={onCancel}
             className="w-9 h-9 rounded-xl bg-court-100 dark:bg-court-700 flex items-center justify-center hover:bg-court-200 dark:hover:bg-court-600 transition-colors"
           >
-            <X className="w-4 h-4 text-court-600 dark:text-court-400" />
+            <ChevronLeft className="w-5 h-5 text-court-600 dark:text-court-300" />
           </button>
           <div className="flex items-center gap-2">
             <Trophy className="w-5 h-5 text-sport-500" />
