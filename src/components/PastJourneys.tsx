@@ -111,25 +111,27 @@ const PastJourneys: FC<PastJourneysProps> = ({ journeys, onDelete, onBack, onVie
 
               {/* Match details */}
               <details className="group/details">
-                <summary className="text-[10px] font-bold uppercase tracking-wider text-court-400 dark:text-court-500 cursor-pointer hover:text-sport-600 dark:hover:text-sport-400 transition-colors list-none flex items-center justify-center gap-1 py-2">
-                  <Eye className="w-3 h-3" />
+                <summary className="text-xs font-bold uppercase tracking-wider text-court-400 dark:text-court-500 cursor-pointer hover:text-sport-600 dark:hover:text-sport-400 transition-colors list-none flex items-center justify-center gap-2 py-3">
+                  <Eye className="w-4 h-4" />
                   Ver Detalle de Partidos
-                  <ChevronDown className="w-3.5 h-3.5 transform group-open/details:rotate-180 transition-transform" />
+                  <ChevronDown className="w-4 h-4 transform group-open/details:rotate-180 transition-transform" />
                 </summary>
-                <div className="mt-3 space-y-1.5 max-h-60 overflow-y-auto pr-1">
+                <div className="mt-3 space-y-2 max-h-48 overflow-y-auto pr-2">
                   {journey.history.map((match, mIdx) => (
-                    <div key={mIdx} className="flex items-center justify-between bg-court-50/50 dark:bg-court-700/50 p-2.5 rounded-xl border border-court-100 dark:border-court-600 gap-2">
-                      <span className={`flex-1 text-right text-[10px] font-bold uppercase truncate ${
-                        match.result?.winnerTeamId === match.team1.id ? 'text-sport-600 dark:text-sport-400' : 'text-court-400 dark:text-court-500'
-                      }`}>{match.team1.name}</span>
-                      <span className={`flex-shrink-0 text-[10px] font-display font-black px-2 py-0.5 rounded-md ${
-                        match.result 
-                          ? 'bg-sport-100 dark:bg-sport-900/50 text-sport-700 dark:text-sport-300' 
-                          : 'bg-court-100 dark:bg-court-600 text-court-400 dark:text-court-500'
-                      }`}>{match.result?.score || 'VS'}</span>
-                      <span className={`flex-1 text-left text-[10px] font-bold uppercase truncate ${
-                        match.result?.winnerTeamId === match.team2.id ? 'text-sport-600 dark:text-sport-400' : 'text-court-400 dark:text-court-500'
-                      }`}>{match.team2.name}</span>
+                    <div key={mIdx} className="bg-court-50 dark:bg-court-700/50 p-3 rounded-xl border border-court-100 dark:border-court-600">
+                      <div className="flex items-center justify-between gap-3">
+                        <span className={`flex-1 text-right text-xs font-bold uppercase truncate ${
+                          match.result?.winnerTeamId === match.team1.id ? 'text-sport-600 dark:text-sport-400' : 'text-court-400 dark:text-court-500'
+                        }`}>{match.team1.name}</span>
+                        <span className={`flex-shrink-0 text-xs font-display font-black px-3 py-1 rounded-lg ${
+                          match.result 
+                            ? 'bg-sport-100 dark:bg-sport-900/50 text-sport-700 dark:text-sport-300' 
+                            : 'bg-court-100 dark:bg-court-600 text-court-400 dark:text-court-500'
+                        }`}>{match.result?.score || 'VS'}</span>
+                        <span className={`flex-1 text-left text-xs font-bold uppercase truncate ${
+                          match.result?.winnerTeamId === match.team2.id ? 'text-sport-600 dark:text-sport-400' : 'text-court-400 dark:text-court-500'
+                        }`}>{match.team2.name}</span>
+                      </div>
                     </div>
                   ))}
                 </div>

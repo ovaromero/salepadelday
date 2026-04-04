@@ -91,34 +91,36 @@ const Statistics: FC<StatisticsProps> = ({ teams, completedMatches, onBack }) =>
               <Calendar className="w-4 h-4 text-court-400 dark:text-court-500" />
               <h2 className="text-xs font-display font-black uppercase tracking-wider text-court-400 dark:text-court-500">Historial de Partidos</h2>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {completedMatches.slice().reverse().map((match, idx) => (
-                <div key={idx} className="bg-white dark:bg-court-800 p-3 sm:p-4 rounded-xl border border-court-100 dark:border-court-700 shadow-sm hover:shadow-md transition-all flex items-center justify-between">
-                  <div className="flex-1 text-right min-w-0">
-                    <span className={`font-display font-bold uppercase tracking-tight text-xs block truncate ${
-                      match.result?.winnerTeamId === match.team1.id ? 'text-sport-600 dark:text-sport-400' : 'text-court-400 dark:text-court-500'
-                    }`}>
-                      {match.team1.name}
-                    </span>
-                  </div>
-                  
-                  <div className="flex-shrink-0">
-                    <div className={`w-12 text-center px-2 py-1 rounded-lg font-display font-black text-xs ${
-                      match.result 
-                        ? 'sport-gradient text-white shadow-sm' 
-                        : 'bg-court-100 dark:bg-court-700 text-court-400 dark:text-court-500'
-                    }`}>
-                      {match.result?.score || 'VS'}
+                <div key={idx} className="bg-white dark:bg-court-800 p-4 rounded-xl border border-court-100 dark:border-court-700 shadow-sm hover:shadow-md transition-all">
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex-1 text-right min-w-0">
+                      <span className={`font-display font-bold uppercase tracking-tight text-sm block truncate ${
+                        match.result?.winnerTeamId === match.team1.id ? 'text-sport-600 dark:text-sport-400' : 'text-court-400 dark:text-court-500'
+                      }`}>
+                        {match.team1.name}
+                      </span>
                     </div>
-                    <span className="text-[9px] font-bold text-court-300 dark:text-court-600 uppercase mt-0.5 block text-center">Ronda {match.id + 1}</span>
-                  </div>
+                    
+                    <div className="flex-shrink-0">
+                      <div className={`w-16 text-center px-3 py-1.5 rounded-lg font-display font-black text-sm ${
+                        match.result 
+                          ? 'sport-gradient text-white shadow-sm' 
+                          : 'bg-court-100 dark:bg-court-700 text-court-400 dark:text-court-500'
+                      }`}>
+                        {match.result?.score || 'VS'}
+                      </div>
+                      <span className="text-[10px] font-bold text-court-300 dark:text-court-600 uppercase mt-1 block text-center">Ronda {match.id + 1}</span>
+                    </div>
 
-                  <div className="flex-1 text-left min-w-0">
-                    <span className={`font-display font-bold uppercase tracking-tight text-xs block truncate ${
-                      match.result?.winnerTeamId === match.team2.id ? 'text-sport-600 dark:text-sport-400' : 'text-court-400 dark:text-court-500'
-                    }`}>
-                      {match.team2.name}
-                    </span>
+                    <div className="flex-1 text-left min-w-0">
+                      <span className={`font-display font-bold uppercase tracking-tight text-sm block truncate ${
+                        match.result?.winnerTeamId === match.team2.id ? 'text-sport-600 dark:text-sport-400' : 'text-court-400 dark:text-court-500'
+                      }`}>
+                        {match.team2.name}
+                      </span>
+                    </div>
                   </div>
                 </div>
               ))}
