@@ -24,7 +24,7 @@ const EXPENSE_CONFIG: { key: ExpenseCategory; label: string; icon: string; color
   { key: 'food', label: 'Comida', icon: '🍔', color: 'text-energy-600' },
   { key: 'soda', label: 'Gaseosa', icon: '🥤', color: 'text-blue-600' },
   { key: 'beer', label: 'Cerveza', icon: '🍺', color: 'text-amber-600' },
-  { key: 'balls', label: 'Pelotitas', icon: '⚫', color: 'text-court-600' },
+  { key: 'balls', label: 'Pelotitas', icon: '🎾', color: 'text-court-600' },
 ];
 
 const ExpensesScreen: FC<ExpensesScreenProps> = ({ journey, onSave, onBack }) => {

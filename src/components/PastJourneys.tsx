@@ -118,16 +118,16 @@ const PastJourneys: FC<PastJourneysProps> = ({ journeys, onDelete, onBack, onVie
                 </summary>
                 <div className="mt-3 space-y-1.5 max-h-60 overflow-y-auto pr-1">
                   {journey.history.map((match, mIdx) => (
-                    <div key={mIdx} className="flex items-center justify-between bg-court-50/50 p-2.5 rounded-xl border border-court-100">
-                      <span className={`text-[10px] font-bold uppercase ${
+                    <div key={mIdx} className="flex items-center justify-between bg-court-50/50 p-2.5 rounded-xl border border-court-100 gap-2">
+                      <span className={`flex-1 text-right text-[10px] font-bold uppercase truncate ${
                         match.result?.winnerTeamId === match.team1.id ? 'text-sport-600' : 'text-court-400'
                       }`}>{match.team1.name}</span>
-                      <span className={`text-[10px] font-display font-black px-2 py-0.5 rounded-md ${
+                      <span className={`flex-shrink-0 text-[10px] font-display font-black px-2 py-0.5 rounded-md ${
                         match.result 
                           ? 'bg-sport-100 text-sport-700' 
                           : 'bg-court-100 text-court-400'
                       }`}>{match.result?.score || 'VS'}</span>
-                      <span className={`text-[10px] font-bold uppercase ${
+                      <span className={`flex-1 text-left text-[10px] font-bold uppercase truncate ${
                         match.result?.winnerTeamId === match.team2.id ? 'text-sport-600' : 'text-court-400'
                       }`}>{match.team2.name}</span>
                     </div>

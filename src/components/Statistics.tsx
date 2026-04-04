@@ -96,27 +96,27 @@ const Statistics: FC<StatisticsProps> = ({ teams, completedMatches, onBack }) =>
             <div className="space-y-2">
               {completedMatches.slice().reverse().map((match, idx) => (
                 <div key={idx} className="bg-white p-3 sm:p-4 rounded-xl border border-court-100 shadow-sm hover:shadow-md transition-all flex items-center justify-between">
-                  <div className="flex-1 text-right pr-3">
-                    <span className={`font-display font-bold uppercase tracking-tight text-xs ${
+                  <div className="flex-1 text-right min-w-0">
+                    <span className={`font-display font-bold uppercase tracking-tight text-xs block truncate ${
                       match.result?.winnerTeamId === match.team1.id ? 'text-sport-600' : 'text-court-400'
                     }`}>
                       {match.team1.name}
                     </span>
                   </div>
                   
-                  <div className="flex flex-col items-center px-2">
-                    <div className={`px-3 py-1 rounded-lg font-display font-black text-xs ${
+                  <div className="flex-shrink-0">
+                    <div className={`w-12 text-center px-2 py-1 rounded-lg font-display font-black text-xs ${
                       match.result 
                         ? 'sport-gradient text-white shadow-sm' 
                         : 'bg-court-100 text-court-400'
                     }`}>
                       {match.result?.score || 'VS'}
                     </div>
-                    <span className="text-[9px] font-bold text-court-300 uppercase mt-0.5">Ronda {match.id + 1}</span>
+                    <span className="text-[9px] font-bold text-court-300 uppercase mt-0.5 block text-center">Ronda {match.id + 1}</span>
                   </div>
 
-                  <div className="flex-1 text-left pl-3">
-                    <span className={`font-display font-bold uppercase tracking-tight text-xs ${
+                  <div className="flex-1 text-left min-w-0">
+                    <span className={`font-display font-bold uppercase tracking-tight text-xs block truncate ${
                       match.result?.winnerTeamId === match.team2.id ? 'text-sport-600' : 'text-court-400'
                     }`}>
                       {match.team2.name}
