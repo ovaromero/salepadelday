@@ -54,12 +54,12 @@ const TournamentDashboard: FC<TournamentDashboardProps> = ({
               <Zap className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-display font-black text-court-900 tracking-tight">
-                Sale<span className="text-sport-600">Padel</span>Day
+              <h1 className="text-xl font-display font-black text-court-900 dark:text-white tracking-tight">
+                Sale<span className="text-sport-600 dark:text-sport-400">Padel</span>Day
               </h1>
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse-live" />
-                <span className="text-[10px] font-bold text-court-400 uppercase tracking-wider">En vivo</span>
+                <span className="text-[10px] font-bold text-court-400 dark:text-court-500 uppercase tracking-wider">En vivo</span>
               </div>
             </div>
           </div>
@@ -67,21 +67,21 @@ const TournamentDashboard: FC<TournamentDashboardProps> = ({
           <div className="flex flex-wrap gap-2">
             <button
               onClick={onViewStats}
-              className="flex items-center gap-1.5 bg-white text-court-700 font-semibold px-3 py-2 rounded-xl text-xs hover:bg-court-50 hover:shadow-md transition-all border border-court-200"
+              className="flex items-center gap-1.5 bg-white dark:bg-court-800 text-court-700 dark:text-court-200 font-semibold px-3 py-2 rounded-xl text-xs hover:bg-court-50 dark:hover:bg-court-700 hover:shadow-md transition-all border border-court-200 dark:border-court-700"
             >
               <BarChart3 className="w-3.5 h-3.5" />
               Stats
             </button>
             <button
               onClick={handleCloseJourney}
-              className="flex items-center gap-1.5 bg-sport-50 text-sport-700 font-semibold px-3 py-2 rounded-xl text-xs hover:bg-sport-100 transition-all"
+              className="flex items-center gap-1.5 bg-sport-50 dark:bg-sport-900/30 text-sport-700 dark:text-sport-400 font-semibold px-3 py-2 rounded-xl text-xs hover:bg-sport-100 dark:hover:bg-sport-900/50 transition-all"
             >
               <LogOut className="w-3.5 h-3.5" />
               Cerrar
             </button>
             <button
               onClick={onReset}
-              className="flex items-center gap-1.5 bg-red-50 text-red-500 font-semibold px-3 py-2 rounded-xl text-xs hover:bg-red-100 transition-all"
+              className="flex items-center gap-1.5 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 font-semibold px-3 py-2 rounded-xl text-xs hover:bg-red-100 dark:hover:bg-red-900/50 transition-all"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               Reset
@@ -158,32 +158,32 @@ const TournamentDashboard: FC<TournamentDashboardProps> = ({
 
           {/* NEXT MATCH */}
           {nextMatch && (
-            <div className="bg-white border-2 border-dashed border-court-200 rounded-2xl p-5 shadow-sm">
+            <div className="bg-white dark:bg-court-800 border-2 border-dashed border-court-200 dark:border-court-700 rounded-2xl p-5 shadow-sm">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <div className="w-1.5 h-1.5 rounded-full bg-court-300" />
-                <p className="text-center font-bold uppercase tracking-widest text-court-400 text-[10px]">Próximo Recomendado</p>
-                <div className="w-1.5 h-1.5 rounded-full bg-court-300" />
+                <div className="w-1.5 h-1.5 rounded-full bg-court-300 dark:bg-court-600" />
+                <p className="text-center font-bold uppercase tracking-widest text-court-400 dark:text-court-500 text-[10px]">Próximo Recomendado</p>
+                <div className="w-1.5 h-1.5 rounded-full bg-court-300 dark:bg-court-600" />
               </div>
               <div className="flex items-center justify-around">
-                <span className="font-display font-black text-court-800 uppercase tracking-tight text-sm">{nextMatch.team1.name}</span>
-                <span className="font-bold text-court-300 italic text-xs mx-2">vs</span>
-                <span className="font-display font-black text-court-800 uppercase tracking-tight text-sm">{nextMatch.team2.name}</span>
+                <span className="font-display font-black text-court-800 dark:text-court-200 uppercase tracking-tight text-sm">{nextMatch.team1.name}</span>
+                <span className="font-bold text-court-300 dark:text-court-600 italic text-xs mx-2">vs</span>
+                <span className="font-display font-black text-court-800 dark:text-court-200 uppercase tracking-tight text-sm">{nextMatch.team2.name}</span>
               </div>
             </div>
           )}
 
           {/* RESTING TEAMS */}
-          <div className="bg-white rounded-2xl border border-court-100 p-5 shadow-sm">
+          <div className="bg-white dark:bg-court-800 rounded-2xl border border-court-100 dark:border-court-700 p-5 shadow-sm">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <div className="w-1.5 h-1.5 rounded-full bg-court-300" />
-              <p className="font-bold uppercase tracking-widest text-court-400 text-[10px]">En Espera</p>
-              <div className="w-1.5 h-1.5 rounded-full bg-court-300" />
+              <div className="w-1.5 h-1.5 rounded-full bg-court-300 dark:bg-court-600" />
+              <p className="font-bold uppercase tracking-widest text-court-400 dark:text-court-500 text-[10px]">En Espera</p>
+              <div className="w-1.5 h-1.5 rounded-full bg-court-300 dark:bg-court-600" />
             </div>
             <div className="flex flex-wrap justify-center gap-2">
               {currentMatch.resting.map(team => (
-                <div key={team.id} className="bg-court-50 px-4 py-2.5 rounded-xl border border-court-200 flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-court-300" />
-                  <span className="font-semibold text-court-600 uppercase text-xs">{team.name}</span>
+                <div key={team.id} className="bg-court-50 dark:bg-court-700 px-4 py-2.5 rounded-xl border border-court-200 dark:border-court-600 flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-court-300 dark:bg-court-500" />
+                  <span className="font-semibold text-court-600 dark:text-court-300 uppercase text-xs">{team.name}</span>
                 </div>
               ))}
             </div>

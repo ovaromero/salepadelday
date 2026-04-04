@@ -50,22 +50,22 @@ const TeamSetup: FC<TeamSetupProps> = ({ onStart }) => {
           <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-3xl sport-gradient shadow-xl shadow-sport-500/30 mb-4">
             <Trophy className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
           </div>
-          <h1 className="text-3xl sm:text-4xl font-display font-black text-court-900 tracking-tight">
-            Sale<span className="text-sport-600">Padel</span>Day
+          <h1 className="text-3xl sm:text-4xl font-display font-black text-court-900 dark:text-white tracking-tight">
+            Sale<span className="text-sport-600 dark:text-sport-400">Padel</span>Day
           </h1>
-          <p className="text-court-500 font-medium mt-1 text-sm">Armá tu torneo y a jugar</p>
+          <p className="text-court-500 dark:text-court-400 font-medium mt-1 text-sm">Armá tu torneo y a jugar</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
           {/* Team count selector */}
-          <div className="glass rounded-2xl p-1.5 flex justify-center gap-2 shadow-lg">
+          <div className="glass dark:glass-dark rounded-2xl p-1.5 flex justify-center gap-2 shadow-lg">
             <button
               type="button"
               onClick={() => setTeamCount(4)}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
                 teamCount === 4 
                   ? 'sport-gradient text-white shadow-lg shadow-sport-500/30 scale-105' 
-                  : 'text-court-600 hover:bg-court-100/50'
+                  : 'text-court-600 dark:text-court-300 hover:bg-court-100/50 dark:hover:bg-court-800'
               }`}
             >
               <Users className="w-4 h-4" />
@@ -77,7 +77,7 @@ const TeamSetup: FC<TeamSetupProps> = ({ onStart }) => {
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
                 teamCount === 5 
                   ? 'sport-gradient text-white shadow-lg shadow-sport-500/30 scale-105' 
-                  : 'text-court-600 hover:bg-court-100/50'
+                  : 'text-court-600 dark:text-court-300 hover:bg-court-100/50 dark:hover:bg-court-800'
               }`}
             >
               <Users className="w-4 h-4" />
@@ -89,7 +89,7 @@ const TeamSetup: FC<TeamSetupProps> = ({ onStart }) => {
           {teams.slice(0, teamCount).map((team, tIdx) => (
             <div 
               key={team.id} 
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-court-100 animate-slide-up group"
+              className="bg-white dark:bg-court-800 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-court-100 dark:border-court-700 animate-slide-up group"
               style={{ animationDelay: `${tIdx * 50}ms` }}
             >
               {/* Team color bar */}
@@ -105,7 +105,7 @@ const TeamSetup: FC<TeamSetupProps> = ({ onStart }) => {
                     value={team.name}
                     onChange={(e) => handleTeamNameChange(tIdx, e.target.value)}
                     placeholder="Nombre del Equipo"
-                    className="flex-1 text-lg font-bold text-court-800 border-b-2 border-transparent focus:border-sport-400 outline-none px-1 py-0.5 transition-colors placeholder:text-court-300"
+                    className="flex-1 text-lg font-bold text-court-800 dark:text-court-100 border-b-2 border-transparent focus:border-sport-400 outline-none px-1 py-0.5 transition-colors placeholder:text-court-300 dark:placeholder:text-court-500"
                     required
                   />
                 </div>
@@ -113,7 +113,7 @@ const TeamSetup: FC<TeamSetupProps> = ({ onStart }) => {
                 <div className="grid grid-cols-2 gap-3">
                   {team.players.map((player, pIdx) => (
                     <div key={pIdx}>
-                      <label className="text-[10px] uppercase text-court-400 font-bold tracking-wider block mb-1.5 ml-1">
+                      <label className="text-[10px] uppercase text-court-400 dark:text-court-500 font-bold tracking-wider block mb-1.5 ml-1">
                         Jugador {pIdx + 1}
                       </label>
                       <input
@@ -121,7 +121,7 @@ const TeamSetup: FC<TeamSetupProps> = ({ onStart }) => {
                         value={player.name}
                         onChange={(e) => handlePlayerChange(tIdx, pIdx, e.target.value)}
                         placeholder="Nombre completo"
-                        className="w-full bg-court-50 rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-sport-400/50 transition-all border border-court-200 text-sm font-medium text-court-700 placeholder:text-court-300"
+                        className="w-full bg-court-50 dark:bg-court-700 rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-sport-400/50 transition-all border border-court-200 dark:border-court-600 text-sm font-medium text-court-700 dark:text-court-200 placeholder:text-court-300 dark:placeholder:text-court-500"
                       />
                     </div>
                   ))}

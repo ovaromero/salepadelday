@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
@@ -29,7 +31,7 @@
   --color-energy-800: #9a3412;
   --color-energy-900: #7c2d12;
   
-  /* Court dark */
+  /* Court dark - Light mode */
   --color-court-50: #f8fafc;
   --color-court-100: #f1f5f9;
   --color-court-200: #e2e8f0;
@@ -42,7 +44,7 @@
   --color-court-900: #0f172a;
 }
 
-/* Smooth animations */
+/* Base styles - Light mode */
 * {
   -webkit-tap-highlight-color: transparent;
 }
@@ -52,9 +54,15 @@ body {
   background: linear-gradient(135deg, #f0fdf4 0%, #f8fafc 50%, #fff7ed 100%);
   background-attachment: fixed;
   min-height: 100vh;
+  transition: background 0.3s ease;
 }
 
-/* Custom scrollbar */
+/* Dark mode body */
+.dark body {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+}
+
+/* Custom scrollbar - Light */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -69,21 +77,39 @@ body {
   background: #94a3b8;
 }
 
+/* Dark scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
 /* Sport gradient utility */
 .sport-gradient {
   background: linear-gradient(135deg, #16a34a 0%, #22c55e 50%, #15803d 100%);
+}
+
+.dark .sport-gradient {
+  background: linear-gradient(135deg, #15803d 0%, #22c55e 50%, #16a34a 100%);
 }
 
 .energy-gradient {
   background: linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%);
 }
 
-/* Glass effect */
+/* Glass effect - Light */
 .glass {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Glass effect - Dark */
+.glass-dark {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(51, 65, 85, 0.5);
 }
 
 /* Pulse animation for live badge */
