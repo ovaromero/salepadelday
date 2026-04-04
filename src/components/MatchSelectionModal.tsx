@@ -1,4 +1,5 @@
 import { useState, type FC } from 'react';
+import { X, Check, ChevronLeft, Shuffle } from 'lucide-react';
 import type { Team } from '../types';
 
 interface MatchSelectionModalProps {
@@ -29,18 +30,31 @@ const MatchSelectionModal: FC<MatchSelectionModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 z-50">
-      <div className="bg-white rounded-3xl shadow-2xl p-4 sm:p-8 max-w-md w-full animate-in fade-in zoom-in duration-200">
-        <h2 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-gray-800 mb-4 sm:mb-6 text-center">Cambiar Rivales</h2>
+    <div className="fixed inset-0 bg-court-900/60 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 z-50 animate-bounce-in">
+      <div className="bg-white rounded-3xl shadow-2xl p-5 sm:p-7 max-w-md w-full">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <button 
+            onClick={onCancel}
+            className="w-9 h-9 rounded-xl bg-court-100 hover:bg-court-200 flex items-center justify-center transition-colors"
+          >
+            <X className="w-4 h-4 text-court-600" />
+          </button>
+          <div className="flex items-center gap-2">
+            <Shuffle className="w-5 h-5 text-sport-500" />
+            <h2 className="text-lg font-display font-black text-court-900 uppercase tracking-tight">Cambiar Rivales</h2>
+          </div>
+          <div className="w-9 h-9" />
+        </div>
         
-        <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
+        <div className="space-y-5 mb-6">
           <div>
-            <label htmlFor="team1" className="text-xs uppercase text-gray-500 font-bold block mb-2">Equipo 1</label>
+            <label htmlFor="team1" className="text-[10px] uppercase text-court-400 font-bold tracking-wider block mb-2 ml-1">Equipo 1</label>
             <select
               id="team1"
               value={team1Id}
               onChange={(e) => setTeam1Id(e.target.value)}
-              className="w-full bg-gray-100 rounded-xl p-3 sm:p-4 font-bold outline-none focus:ring-4 focus:ring-indigo-200 transition-all appearance-none"
+              className="w-full bg-court-50 border border-court-200 rounded-xl p-3.5 font-semibold outline-none focus:ring-2 focus:ring-sport-400/50 transition-all appearance-none cursor-pointer"
             >
               {teams.map(team => (
                 <option key={team.id} value={team.id}>{team.name}</option>
@@ -48,15 +62,19 @@ const MatchSelectionModal: FC<MatchSelectionModalProps> = ({
             </select>
           </div>
 
-          <div className="text-center font-black text-gray-300 italic">VS</div>
+          <div className="flex items-center justify-center gap-3">
+            <div className="flex-1 h-px bg-court-200" />
+            <div className="bg-court-100 rounded-lg px-3 py-1.5 font-display font-black text-court-400 text-xs italic">VS</div>
+            <div className="flex-1 h-px bg-court-200" />
+          </div>
 
           <div>
-            <label htmlFor="team2" className="text-xs uppercase text-gray-500 font-bold block mb-2">Equipo 2</label>
+            <label htmlFor="team2" className="text-[10px] uppercase text-court-400 font-bold tracking-wider block mb-2 ml-1">Equipo 2</label>
             <select
               id="team2"
               value={team2Id}
               onChange={(e) => setTeam2Id(e.target.value)}
-              className="w-full bg-gray-100 rounded-xl p-3 sm:p-4 font-bold outline-none focus:ring-4 focus:ring-indigo-200 transition-all appearance-none"
+              className="w-full bg-court-50 border border-court-200 rounded-xl p-3.5 font-semibold outline-none focus:ring-2 focus:ring-sport-400/50 transition-all appearance-none cursor-pointer"
             >
               {teams.map(team => (
                 <option key={team.id} value={team.id}>{team.name}</option>
@@ -65,19 +83,25 @@ const MatchSelectionModal: FC<MatchSelectionModalProps> = ({
           </div>
         </div>
 
-        {error && <p className="text-red-500 text-sm font-bold text-center mb-4">{error}</p>}
+        {error && (
+          <div className="bg-red-50 text-red-600 text-sm font-semibold text-center p-3 rounded-xl mb-4">
+            {error}
+          </div>
+        )}
 
-        <div className="flex flex-col sm:flex-row gap-2 sm:space-x-4">
+        <div className="flex gap-3">
           <button
             onClick={onCancel}
-            className="flex-1 bg-gray-100 text-gray-500 py-3 sm:py-4 rounded-2xl font-bold uppercase tracking-tight hover:bg-gray-200 transition-all"
+            className="flex-1 flex items-center justify-center gap-2 bg-court-100 text-court-500 py-3.5 rounded-2xl font-semibold uppercase tracking-tight hover:bg-court-200 transition-all"
           >
+            <ChevronLeft className="w-4 h-4" />
             Cancelar
           </button>
           <button
             onClick={handleSave}
-            className="flex-1 bg-indigo-600 text-white py-3 sm:py-4 rounded-2xl font-black uppercase tracking-tight hover:bg-indigo-700 shadow-xl transition-all"
+            className="flex-1 flex items-center justify-center gap-2 sport-gradient text-white py-3.5 rounded-2xl font-display font-black uppercase tracking-tight hover:shadow-xl hover:shadow-sport-500/30 transition-all"
           >
+            <Check className="w-4 h-4" />
             Cambiar
           </button>
         </div>

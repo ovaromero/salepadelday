@@ -1,1 +1,115 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  
+  /* Sport palette - Padel energy */
+  --color-sport-50: #f0fdf4;
+  --color-sport-100: #dcfce7;
+  --color-sport-200: #bbf7d0;
+  --color-sport-300: #86efac;
+  --color-sport-400: #4ade80;
+  --color-sport-500: #22c55e;
+  --color-sport-600: #16a34a;
+  --color-sport-700: #15803d;
+  --color-sport-800: #166534;
+  --color-sport-900: #14532d;
+  
+  /* Energy orange */
+  --color-energy-50: #fff7ed;
+  --color-energy-100: #ffedd5;
+  --color-energy-200: #fed7aa;
+  --color-energy-300: #fdba74;
+  --color-energy-400: #fb923c;
+  --color-energy-500: #f97316;
+  --color-energy-600: #ea580c;
+  --color-energy-700: #c2410c;
+  --color-energy-800: #9a3412;
+  --color-energy-900: #7c2d12;
+  
+  /* Court dark */
+  --color-court-50: #f8fafc;
+  --color-court-100: #f1f5f9;
+  --color-court-200: #e2e8f0;
+  --color-court-300: #cbd5e1;
+  --color-court-400: #94a3b8;
+  --color-court-500: #64748b;
+  --color-court-600: #475569;
+  --color-court-700: #334155;
+  --color-court-800: #1e293b;
+  --color-court-900: #0f172a;
+}
+
+/* Smooth animations */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: linear-gradient(135deg, #f0fdf4 0%, #f8fafc 50%, #fff7ed 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Sport gradient utility */
+.sport-gradient {
+  background: linear-gradient(135deg, #16a34a 0%, #22c55e 50%, #15803d 100%);
+}
+
+.energy-gradient {
+  background: linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%);
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Pulse animation for live badge */
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.animate-pulse-live {
+  animation: pulse-live 2s ease-in-out infinite;
+}
+
+/* Slide up animation */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+/* Bounce in */
+@keyframes bounce-in {
+  0% { opacity: 0; transform: scale(0.9); }
+  50% { transform: scale(1.02); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.animate-bounce-in {
+  animation: bounce-in 0.4s ease-out;
+}
