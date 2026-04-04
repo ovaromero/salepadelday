@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import type { Team, MatchResult, TournamentState, Journey } from '../types';
+import type { Team, MatchResult, TournamentState, Journey, Expenses } from '../types';
 import { generateMatches, getNextMatch, generateId } from '../utils/scheduler';
 
 const STORAGE_KEY = 'sale_padel_day_state_v2';
@@ -86,7 +86,8 @@ export const useTournament = () => {
         id: generateId(),
         date: new Date().toISOString(),
         teams: prev.active.teams,
-        history: prev.active.history.filter(m => m.result), // Only save completed matches
+        history: prev.active.history.filter(m => m.result),
+        expenses: null,
       };
 
       return {
@@ -95,6 +96,17 @@ export const useTournament = () => {
         journeys: [newJourney, ...prev.journeys],
       };
     });
+  }, []);
+
+  const updateJourneyExpenses = useCallback((journeyId: string, expenses: Expenses) => {
+    setState(prev => ({
+      ...prev,
+      journeys: prev.journeys.map(j => 
+        j.id === journeyId 
+          ? { ...j, expenses }
+          : j
+      )
+    }));
   }, []);
 
   const deleteJourney = useCallback((id: string) => {
@@ -112,7 +124,7 @@ export const useTournament = () => {
   }, []);
 
   const currentMatch = state.active?.history[state.active.currentRoundIndex];
-  const nextMatch = state.active?.history[state.active.currentRoundIndex + 1]; // In dynamic mode, next is pre-calculated but can be overridden
+  const nextMatch = state.active?.history[state.active.currentRoundIndex + 1];
   const completedMatches = state.active?.history.filter(m => m.result) || [];
 
   return {
@@ -124,6 +136,7 @@ export const useTournament = () => {
     finishMatch,
     changeCurrentMatch,
     closeJourney,
+    updateJourneyExpenses,
     deleteJourney,
     resetTournament,
   };

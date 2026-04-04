@@ -44,25 +44,25 @@ const TournamentDashboard: FC<TournamentDashboardProps> = ({
   };
 
   return (
-    <div className="max-w-xl mx-auto p-4 flex flex-col min-h-screen">
-      <div className="flex justify-between items-center mb-8">
+    <div className="max-w-xl mx-auto p-2 sm:p-4 flex flex-col min-h-screen">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6 sm:mb-8">
         <h1 className="text-2xl font-black text-indigo-600 tracking-tighter uppercase italic">SalePadelDay</h1>
-        <div className="flex space-x-2">
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={onViewStats}
-            className="bg-gray-100 text-gray-700 font-bold px-3 py-2 rounded-xl text-xs hover:bg-gray-200 uppercase"
+            className="bg-gray-100 text-gray-700 font-bold px-2 sm:px-3 py-2 rounded-xl text-xs hover:bg-gray-200 uppercase"
           >
             Estadísticas
           </button>
           <button
             onClick={handleCloseJourney}
-            className="bg-indigo-50 text-indigo-600 font-bold px-3 py-2 rounded-xl text-xs hover:bg-indigo-100 uppercase"
+            className="bg-indigo-50 text-indigo-600 font-bold px-2 sm:px-3 py-2 rounded-xl text-xs hover:bg-indigo-100 uppercase"
           >
-            Cerrar Jornada
+            Cerrar
           </button>
           <button
             onClick={onReset}
-            className="bg-red-50 text-red-500 font-bold px-3 py-2 rounded-xl text-xs hover:bg-red-100 uppercase"
+            className="bg-red-50 text-red-500 font-bold px-2 sm:px-3 py-2 rounded-xl text-xs hover:bg-red-100 uppercase"
           >
             Reset
           </button>

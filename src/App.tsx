@@ -4,9 +4,10 @@ import TeamSetup from './components/TeamSetup';
 import TournamentDashboard from './components/TournamentDashboard';
 import Statistics from './components/Statistics';
 import PastJourneys from './components/PastJourneys';
-import type { Team } from './types';
+import ExpensesScreen from './components/ExpensesScreen';
+import type { Team, Journey, Expenses } from './types';
 
-type View = 'setup' | 'dashboard' | 'stats' | 'history';
+type View = 'setup' | 'dashboard' | 'stats' | 'history' | 'expenses';
 
 function App() {
   const { 
@@ -19,12 +20,14 @@ function App() {
     changeCurrentMatch,
     closeJourney,
     deleteJourney,
-    resetTournament 
+    resetTournament,
+    updateJourneyExpenses,
   } = useTournament();
   
   const [view, setView] = useState<View>(() => {
     return state.active ? 'dashboard' : 'setup';
   });
+  const [selectedJourney, setSelectedJourney] = useState<Journey | null>(null);
 
   const handleStart = (teams: Team[]) => {
     startTournament(teams);
@@ -42,6 +45,30 @@ function App() {
     closeJourney();
     setView('setup');
   };
+
+  const handleSaveExpenses = (expenses: Expenses) => {
+    if (selectedJourney) {
+      updateJourneyExpenses(selectedJourney.id, expenses);
+      setSelectedJourney(prev => prev ? { ...prev, expenses } : null);
+    }
+  };
+
+  const openExpenses = (journey: Journey) => {
+    setSelectedJourney(journey);
+    setView('expenses');
+  };
+
+  if (view === 'expenses' && selectedJourney) {
+    return (
+      <div className="min-h-screen bg-gray-50 py-6">
+        <ExpensesScreen
+          journey={selectedJourney}
+          onSave={handleSaveExpenses}
+          onBack={() => setView('history')}
+        />
+      </div>
+    );
+  }
 
   if (view === 'setup') {
     return (
@@ -65,7 +92,8 @@ function App() {
         <PastJourneys 
           journeys={state.journeys} 
           onDelete={deleteJourney} 
-          onBack={() => setView(state.active ? 'dashboard' : 'setup')} 
+          onBack={() => setView(state.active ? 'dashboard' : 'setup')}
+          onViewExpenses={openExpenses}
         />
       </div>
     );

@@ -10,7 +10,7 @@ export interface Team {
 
 export interface MatchResult {
   winnerTeamId: string;
-  score?: string; // e.g., "4-2"
+  score?: string;
 }
 
 export interface Match {
@@ -21,11 +21,27 @@ export interface Match {
   result?: MatchResult;
 }
 
+export interface ExpenseItem {
+  amount: number;
+  players: number;
+}
+
+export type ExpenseCategory = 'court' | 'food' | 'soda' | 'beer' | 'balls';
+
+export interface Expenses {
+  court: ExpenseItem;
+  food: ExpenseItem;
+  soda: ExpenseItem;
+  beer: ExpenseItem;
+  balls: ExpenseItem;
+}
+
 export interface Journey {
   id: string;
-  date: string; // ISO string
+  date: string;
   teams: Team[];
   history: Match[];
+  expenses: Expenses | null;
 }
 
 export interface ActiveTournament {
