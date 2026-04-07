@@ -31,7 +31,20 @@ function ThemeToggle() {
 }
 
 function AppContent() {
-  const { state, currentMatch, nextMatch, completedMatches, startTournament, finishMatch, changeCurrentMatch, closeJourney, deleteJourney, resetTournament, updateJourneyExpenses } = useTournament();
+  const { 
+    state, 
+    currentMatch, 
+    nextMatch, 
+    completedMatches, 
+    startTournament, 
+    finishMatch, 
+    changeCurrentMatch, 
+    renameTeam, 
+    closeJourney, 
+    deleteJourney, 
+    resetTournament, 
+    updateJourneyExpenses 
+  } = useTournament();
   
   const [view, setView] = useState<View>(() => state.active ? 'dashboard' : 'setup');
   const [selectedJourney, setSelectedJourney] = useState<Journey | null>(null);
@@ -88,20 +101,24 @@ function AppContent() {
   // History view
   if (view === 'history') {
     return (
-      <>
-        <div className="flex justify-end px-4 pt-4"><ThemeToggle /></div>
+      <div className="min-h-screen">
+        <div className="max-w-2xl mx-auto px-4 pt-4 flex justify-end">
+          <ThemeToggle />
+        </div>
         <PastJourneys journeys={state.journeys} onDelete={deleteJourney} onBack={() => setView(state.active ? 'dashboard' : 'setup')} onViewExpenses={openExpenses} />
-      </>
+      </div>
     );
   }
 
   // Stats view
   if (view === 'stats') {
     return (
-      <>
-        <div className="flex justify-end px-4 pt-4"><ThemeToggle /></div>
+      <div className="min-h-screen">
+        <div className="max-w-2xl mx-auto px-4 pt-4 flex justify-end">
+          <ThemeToggle />
+        </div>
         <Statistics teams={state.active?.teams || []} completedMatches={completedMatches} onBack={() => setView('dashboard')} />
-      </>
+      </div>
     );
   }
 
@@ -112,19 +129,22 @@ function AppContent() {
   }
 
   return (
-    <>
-      <div className="flex justify-end px-4 pt-4"><ThemeToggle /></div>
+    <div className="min-h-screen">
+      <div className="max-w-2xl mx-auto px-4 pt-4 flex justify-end">
+        <ThemeToggle />
+      </div>
       <TournamentDashboard
-      teams={state.active.teams}
-      currentMatch={currentMatch}
-      nextMatch={nextMatch}
-      onFinishMatch={finishMatch}
-      onChangeMatch={changeCurrentMatch}
-      onViewStats={() => setView('stats')}
-      onCloseJourney={handleCloseJourney}
-      onReset={handleReset}
-    />
-    </>
+        teams={state.active.teams}
+        currentMatch={currentMatch}
+        nextMatch={nextMatch}
+        onFinishMatch={finishMatch}
+        onChangeMatch={changeCurrentMatch}
+        onRenameTeam={renameTeam}
+        onViewStats={() => setView('stats')}
+        onCloseJourney={handleCloseJourney}
+        onReset={handleReset}
+      />
+    </div>
   );
 }
 

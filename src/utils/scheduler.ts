@@ -27,6 +27,10 @@ export const shuffle = <T>(array: T[]): T[] => {
  * Returns the next recommended match based on match counts and avoiding immediate repeats.
  */
 export const getNextMatch = (teams: Team[], history: Match[]): Match => {
+  if (teams.length < 2) {
+    throw new Error('At least 2 teams are required to schedule a match');
+  }
+
   const lastMatch = history.length > 0 ? history[history.length - 1] : null;
   const lastMatchIds = lastMatch ? [lastMatch.team1.id, lastMatch.team2.id] : [];
 

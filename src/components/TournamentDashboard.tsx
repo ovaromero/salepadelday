@@ -1,5 +1,5 @@
 import { useState, type FC } from 'react';
-import { Trophy, BarChart3, LogOut, RotateCcw, Shuffle, Zap } from 'lucide-react';
+import { Trophy, BarChart3, LogOut, RotateCcw, Shuffle, Zap, Edit3 } from 'lucide-react';
 import type { Match, MatchResult, Team } from '../types';
 import ResultModal from './ResultModal';
 import MatchSelectionModal from './MatchSelectionModal';
@@ -10,6 +10,7 @@ interface TournamentDashboardProps {
   nextMatch?: Match;
   onFinishMatch: (result: MatchResult) => void;
   onChangeMatch: (team1Id: string, team2Id: string) => void;
+  onRenameTeam: (teamId: string, newName: string) => void;
   onViewStats: () => void;
   onCloseJourney: () => void;
   onReset: () => void;
@@ -21,6 +22,7 @@ const TournamentDashboard: FC<TournamentDashboardProps> = ({
   nextMatch,
   onFinishMatch,
   onChangeMatch,
+  onRenameTeam,
   onViewStats,
   onCloseJourney,
   onReset,
@@ -41,6 +43,13 @@ const TournamentDashboard: FC<TournamentDashboardProps> = ({
   const handleCloseJourney = () => {
     if (confirm('¿Cerrar jornada? Se guardarán las estadísticas y se reseteará el tablero para un nuevo día.')) {
       onCloseJourney();
+    }
+  };
+
+  const handleRename = (teamId: string, currentName: string) => {
+    const newName = prompt('Nuevo nombre para el equipo:', currentName);
+    if (newName && newName.trim() && newName !== currentName) {
+      onRenameTeam(teamId, newName.trim());
     }
   };
 
@@ -106,11 +115,20 @@ const TournamentDashboard: FC<TournamentDashboardProps> = ({
             </div>
             
             <div className="flex items-center justify-between relative z-10">
-              <div className="flex-1 text-center">
+              <div className="flex-1 text-center group">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                   <Trophy className="w-7 h-7 sm:w-8 sm:h-8" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-display font-black mb-2 leading-tight uppercase tracking-tight">{currentMatch.team1.name}</h3>
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <h3 className="text-xl sm:text-2xl font-display font-black leading-tight uppercase tracking-tight">{currentMatch.team1.name}</h3>
+                  <button 
+                    onClick={() => handleRename(currentMatch.team1.id, currentMatch.team1.name)}
+                    className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors sm:opacity-0 sm:group-hover:opacity-100"
+                    title="Renombrar equipo"
+                  >
+                    <Edit3 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
                 {currentMatch.team1.players.some(p => p.name) && (
                   <p className="text-xs font-semibold text-sport-100 uppercase tracking-wide">
                     {currentMatch.team1.players[0].name} <br/> {currentMatch.team1.players[1].name}
@@ -124,11 +142,20 @@ const TournamentDashboard: FC<TournamentDashboardProps> = ({
                 </div>
               </div>
               
-              <div className="flex-1 text-center">
+              <div className="flex-1 text-center group">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                   <Trophy className="w-7 h-7 sm:w-8 sm:h-8" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-display font-black mb-2 leading-tight uppercase tracking-tight">{currentMatch.team2.name}</h3>
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <h3 className="text-xl sm:text-2xl font-display font-black leading-tight uppercase tracking-tight">{currentMatch.team2.name}</h3>
+                  <button 
+                    onClick={() => handleRename(currentMatch.team2.id, currentMatch.team2.name)}
+                    className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors sm:opacity-0 sm:group-hover:opacity-100"
+                    title="Renombrar equipo"
+                  >
+                    <Edit3 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
                 {currentMatch.team2.players.some(p => p.name) && (
                   <p className="text-xs font-semibold text-sport-100 uppercase tracking-wide">
                     {currentMatch.team2.players[0].name} <br/> {currentMatch.team2.players[1].name}

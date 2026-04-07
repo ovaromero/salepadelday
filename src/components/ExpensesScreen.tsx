@@ -123,25 +123,25 @@ const ExpensesScreen: FC<ExpensesScreenProps> = ({ journey, onSave, onBack }) =>
                     value={expenses[key].amount || ''}
                     onChange={(e) => handleAmountChange(key, e.target.value)}
                     disabled={!isEditing}
-                    className="w-full bg-court-50 dark:bg-court-700 border border-court-200 dark:border-court-600 rounded-xl py-2.5 pl-7 pr-3 text-right font-display font-bold text-court-800 dark:text-court-100 text-sm focus:ring-2 focus:ring-sport-400/50 outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    className="w-full bg-court-50 dark:bg-court-700/30 border border-court-200 dark:border-court-600/50 rounded-xl py-2.5 pl-7 pr-3 text-right font-display font-bold text-court-800 dark:text-court-100 text-sm focus:ring-2 focus:ring-sport-400/50 outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     min="0"
                     placeholder="0"
                   />
                 </div>
                 
-                <div className="flex items-center gap-1">
+                <div className="flex items-center bg-court-50 dark:bg-court-700/50 rounded-xl p-1 border border-court-200 dark:border-court-600/30">
                   <button
                     onClick={() => handlePlayersChange(key, -1)}
                     disabled={!isEditing || expenses[key].players <= 1}
-                    className="w-8 h-8 rounded-lg bg-court-100 dark:bg-court-700 text-court-500 dark:text-court-400 font-bold text-sm hover:bg-court-200 dark:hover:bg-court-600 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center justify-center"
+                    className="w-8 h-8 rounded-lg bg-white dark:bg-court-600 text-court-500 dark:text-court-400 shadow-sm border border-court-100 dark:border-court-500/30 hover:bg-court-50 dark:hover:bg-court-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center"
                   >
                     <Minus className="w-3.5 h-3.5" />
                   </button>
-                  <span className="w-8 text-center font-display font-black text-sport-600 dark:text-sport-400 text-sm">{expenses[key].players}</span>
+                  <span className="w-9 text-center font-display font-black text-sport-600 dark:text-sport-400 text-sm">{expenses[key].players}</span>
                   <button
                     onClick={() => handlePlayersChange(key, 1)}
                     disabled={!isEditing}
-                    className="w-8 h-8 rounded-lg bg-court-100 dark:bg-court-700 text-court-500 dark:text-court-400 font-bold text-sm hover:bg-court-200 dark:hover:bg-court-600 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center justify-center"
+                    className="w-8 h-8 rounded-lg bg-white dark:bg-court-600 text-court-500 dark:text-court-400 shadow-sm border border-court-100 dark:border-court-500/30 hover:bg-court-50 dark:hover:bg-court-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center"
                   >
                     <Plus className="w-3.5 h-3.5" />
                   </button>
