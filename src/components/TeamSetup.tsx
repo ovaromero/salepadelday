@@ -8,7 +8,7 @@ interface TeamSetupProps {
 }
 
 const TeamSetup: FC<TeamSetupProps> = ({ onStart }) => {
-  const [teamCount, setTeamCount] = useState<4 | 5>(4);
+  const [teamCount, setTeamCount] = useState<3 | 4 | 5>(4);
   const [teams, setTeams] = useState<Team[]>(() => 
     Array.from({ length: 5 }, (_, i) => ({
       id: generateId(),
@@ -58,11 +58,23 @@ const TeamSetup: FC<TeamSetupProps> = ({ onStart }) => {
 
         <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
           {/* Team count selector */}
-          <div className="bg-white dark:bg-court-800 rounded-2xl p-2 flex justify-center gap-2 shadow-md border border-court-100 dark:border-court-700">
+          <div className="bg-white dark:bg-court-800 rounded-2xl p-2 flex justify-center gap-2 shadow-md border border-court-100 dark:border-court-700 overflow-x-auto sm:overflow-x-visible no-scrollbar">
+            <button
+              type="button"
+              onClick={() => setTeamCount(3)}
+              className={`flex-1 min-w-[100px] flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
+                teamCount === 3 
+                  ? 'sport-gradient text-white shadow-lg shadow-sport-500/30' 
+                  : 'bg-transparent text-court-600 dark:text-court-300 hover:bg-court-50 dark:hover:bg-court-700'
+              }`}
+            >
+              <Users className="w-4 h-4" />
+              3 Equipos
+            </button>
             <button
               type="button"
               onClick={() => setTeamCount(4)}
-              className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
+              className={`flex-1 min-w-[100px] flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
                 teamCount === 4 
                   ? 'sport-gradient text-white shadow-lg shadow-sport-500/30' 
                   : 'bg-transparent text-court-600 dark:text-court-300 hover:bg-court-50 dark:hover:bg-court-700'
@@ -74,7 +86,7 @@ const TeamSetup: FC<TeamSetupProps> = ({ onStart }) => {
             <button
               type="button"
               onClick={() => setTeamCount(5)}
-              className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
+              className={`flex-1 min-w-[100px] flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
                 teamCount === 5 
                   ? 'sport-gradient text-white shadow-lg shadow-sport-500/30' 
                   : 'bg-transparent text-court-600 dark:text-court-300 hover:bg-court-50 dark:hover:bg-court-700'

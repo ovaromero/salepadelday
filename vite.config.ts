@@ -9,7 +9,11 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  server: {
+    port: 80,
+  },
   preview: {
+    port: 80,
     allowedHosts: ['167.234.240.131.nip.io'],
   },
   test: {

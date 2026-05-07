@@ -41,4 +41,28 @@ describe('getNextMatch', () => {
     expect(nextIds).not.toContain('3');
     expect(nextIds).not.toContain('4');
   });
+
+  it('should rotate correctly with only 3 teams', () => {
+    const threeTeams = teams.slice(0, 3);
+    
+    // Match 1: Any 2 teams (1 rests)
+    const m1 = getNextMatch(threeTeams, []);
+    const m1Ids = [m1.team1.id, m1.team2.id].sort();
+    expect(m1Ids.length).toBe(2);
+    expect(new Set(m1Ids).size).toBe(2);
+    expect(m1.resting.length).toBe(1);
+
+    // Match 2: The team that rested MUST play
+    const restingId = m1.resting[0].id;
+    const history = [
+      { ...m1, result: { winnerTeamId: m1.team1.id } }
+    ];
+    const m2 = getNextMatch(threeTeams, history);
+    const m2Ids = [m2.team1.id, m2.team2.id].sort();
+    
+    expect(m2Ids).toContain(restingId);
+    expect(m2Ids).not.toEqual(m1Ids);
+    expect(m2.resting.length).toBe(1);
+    expect(m2.resting[0].id).not.toBe(restingId);
+  });
 });
