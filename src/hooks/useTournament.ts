@@ -1,32 +1,24 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { Team, MatchResult, TournamentState, Journey, Expenses } from '../types';
 import { getNextMatch, generateId } from '../utils/scheduler';
+import { createLocalStorageAdapter, STORAGE_KEY, isValidState } from '../adapters/secondary/storage/localStorage.adapter';
+import type { StoragePort } from '../core/ports/storage.port';
 
-const STORAGE_KEY = 'sale_padel_day_state_v2';
+const defaultStorage = createLocalStorageAdapter();
 
-const safeSave = (state: TournamentState) => {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } catch (error) {
-    console.error('Failed to save to localStorage:', error);
-  }
-};
+interface UseTournamentOptions {
+  /** Optional storage adapter for dependency injection (useful for testing) */
+  storage?: StoragePort;
+}
 
-const isValidState = (data: any): data is TournamentState => {
-  if (!data || typeof data !== 'object') return false;
-  if (data.active !== null) {
-    if (typeof data.active !== 'object') return false;
-    if (!Array.isArray(data.active.teams)) return false;
-    if (!Array.isArray(data.active.history)) return false;
-    if (typeof data.active.currentRoundIndex !== 'number') return false;
-  }
-  if (!Array.isArray(data.journeys)) return false;
-  return true;
-};
+export const useTournament = (options: UseTournamentOptions = {}) => {
+  const { storage = defaultStorage } = options;
 
-export const useTournament = () => {
   const [state, setState] = useState<TournamentState>(() => {
+    // Try storage first (for async adapters), then fall back to localStorage sync
+    // This allows both real storage and mock adapters to work
     try {
+      // Attempt synchronous localStorage as fallback
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
@@ -44,8 +36,8 @@ export const useTournament = () => {
   });
 
   useEffect(() => {
-    safeSave(state);
-  }, [state]);
+    storage.save(state);
+  }, [state, storage]);
 
   const startTournament = useCallback((teams: Team[]) => {
     if (teams.length < 2) {

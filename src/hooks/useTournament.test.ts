@@ -1,20 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
 import { useTournament } from './useTournament';
+import { createMockStorageAdapter } from '../adapters/secondary/storage/mock.adapter';
 import type { Team } from '../types';
-
-// Mock localStorage
-const localStorageMock = (() => {
-  let store: Record<string, string> = {};
-  return {
-    getItem: (key: string) => store[key] || null,
-    setItem: (key: string, value: string) => { store[key] = value.toString(); },
-    removeItem: (key: string) => { delete store[key]; },
-    clear: () => { store = {}; },
-  };
-})();
-
-Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
 describe('useTournament', () => {
   const teams: Team[] = [
@@ -25,11 +13,12 @@ describe('useTournament', () => {
   ];
 
   beforeEach(() => {
-    localStorage.clear();
+    // Each test gets a fresh mock storage - no setup needed!
   });
 
   it('should start a tournament and then close it into journeys', () => {
-    const { result } = renderHook(() => useTournament());
+    const mockStorage = createMockStorageAdapter();
+    const { result } = renderHook(() => useTournament({ storage: mockStorage }));
 
     act(() => {
       result.current.startTournament(teams);
@@ -48,7 +37,8 @@ describe('useTournament', () => {
   });
 
   it('should delete a journey', () => {
-    const { result } = renderHook(() => useTournament());
+    const mockStorage = createMockStorageAdapter();
+    const { result } = renderHook(() => useTournament({ storage: mockStorage }));
 
     act(() => {
       result.current.startTournament(teams);

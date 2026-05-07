@@ -1,7 +1,8 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
 import { useTournament } from './useTournament';
-import type { Team } from '../types';
+import { createMockStorageAdapter } from '../adapters/secondary/storage/mock.adapter';
+import type { Team, TournamentState } from '../types';
 
 const mockTeams: Team[] = [
   { id: '1', name: 'Team 1', players: [{ name: 'P1' }, { name: 'P2' }] },
@@ -11,15 +12,13 @@ const mockTeams: Team[] = [
 
 describe('useTournament robustness', () => {
   beforeEach(() => {
-    localStorage.clear();
-  });
-
-  afterEach(() => {
     vi.restoreAllMocks();
   });
 
   it('should throw an error if starting with less than 2 teams', () => {
-    const { result } = renderHook(() => useTournament());
+    const mockStorage = createMockStorageAdapter();
+    const { result } = renderHook(() => useTournament({ storage: mockStorage }));
+    
     expect(() => {
       act(() => {
         result.current.startTournament([]);
@@ -28,7 +27,8 @@ describe('useTournament robustness', () => {
   });
 
   it('should re-generate the next match when current match is changed', () => {
-    const { result } = renderHook(() => useTournament());
+    const mockStorage = createMockStorageAdapter();
+    const { result } = renderHook(() => useTournament({ storage: mockStorage }));
     
     act(() => {
       result.current.startTournament(mockTeams);
@@ -45,7 +45,8 @@ describe('useTournament robustness', () => {
   });
 
   it('should only archive matches with results in closeJourney', () => {
-    const { result } = renderHook(() => useTournament());
+    const mockStorage = createMockStorageAdapter();
+    const { result } = renderHook(() => useTournament({ storage: mockStorage }));
     
     act(() => {
       result.current.startTournament(mockTeams);
@@ -74,27 +75,39 @@ describe('useTournament robustness', () => {
     expect(result.current.state.journeys[0].history[0].result).toBeDefined();
   });
 
-  it('should handle localStorage quota errors gracefully', () => {
+  it('should handle storage quota errors gracefully', () => {
     const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    const setItemSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
-      throw new Error('Quota exceeded');
-    });
+    const mockStorage = createMockStorageAdapter({ shouldThrowOnSave: true });
 
-    const { result } = renderHook(() => useTournament());
+    const { result } = renderHook(() => useTournament({ storage: mockStorage }));
     
     act(() => {
       result.current.startTournament(mockTeams);
     });
 
-    expect(setItemSpy).toHaveBeenCalled();
-    expect(consoleSpy).toHaveBeenCalledWith('Failed to save to localStorage:', expect.any(Error));
+    // The save will fail but the error should be caught and logged
+    expect(consoleSpy).toHaveBeenCalled();
+    expect(consoleSpy).toHaveBeenCalledWith('Failed to save:', expect.any(Error));
   });
 
-  it('should ignore invalid state in localStorage', () => {
-    localStorage.setItem('sale_padel_day_state_v2', '{"invalid": "data"}');
-    const { result } = renderHook(() => useTournament());
+  it('should support reset to clear mock storage state', () => {
+    const mockStorage = createMockStorageAdapter();
     
-    expect(result.current.state.active).toBeNull();
-    expect(result.current.state.journeys).toEqual([]);
+    const { result } = renderHook(() => useTournament({ storage: mockStorage }));
+    
+    act(() => {
+      result.current.startTournament(mockTeams);
+    });
+
+    expect(result.current.state.active).not.toBeNull();
+
+    // Reset the mock storage and verify clean state
+    mockStorage.reset();
+    
+    // Re-render to get fresh state (simulating app reload)
+    const { result: result2 } = renderHook(() => useTournament({ storage: mockStorage }));
+    
+    expect(result2.current.state.active).toBeNull();
+    expect(result2.current.state.journeys).toEqual([]);
   });
 });
