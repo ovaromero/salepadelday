@@ -5,20 +5,10 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
+  plugins: [react(), tailwindcss()],
   server: {
+    host: '0.0.0.0',
     port: 80,
-  },
-  preview: {
-    port: 80,
-    allowedHosts: ['167.234.240.131.nip.io'],
-  },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/test/setup.ts',
-  },
+    allowedHosts: true
+  }
 })

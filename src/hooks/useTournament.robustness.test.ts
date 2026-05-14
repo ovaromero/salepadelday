@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
 import { useTournament } from './useTournament';
 import { createMockStorageAdapter } from '../adapters/secondary/storage/mock.adapter';
-import type { Team, TournamentState } from '../types';
+import type { Team } from '../types';
 
 const mockTeams: Team[] = [
   { id: '1', name: 'Team 1', players: [{ name: 'P1' }, { name: 'P2' }] },
